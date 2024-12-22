@@ -1,5 +1,10 @@
 *.tfvars
-data/
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+.terraform*
+
+data/*
 src/data_collection/blink_auth.json
 
 venv/

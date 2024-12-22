@@ -5,5 +5,4 @@ variable "aws_region" {
 
 variable "data_collection_bucket_name" {
     type = string
-    default = "teddy-videos"
 }
