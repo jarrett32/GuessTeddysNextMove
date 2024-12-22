@@ -1,0 +1,8 @@
+*.tfvars
+data/
+src/data_collection/blink_auth.json
+
+venv/
+.env
+
+.DS_Store
