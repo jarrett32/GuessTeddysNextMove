@@ -5,9 +5,10 @@ from ultralytics import YOLO
 
 def inference(video_path):
     model = YOLO('runs/train/teddy_model/weights/best.pt')
-    results = model.predict(video_path, conf=0.5, iou=0.5, imgsz=640, device='cpu')
+    results = model.predict(video_path, conf=0.5, iou=0.5, imgsz=640,
+                            device='cpu', stream=True)
 
-    with open('output.txt', 'w') as f:
+    with open('src/inference/output.txt', 'a') as f:
         for frame_idx, result in enumerate(results):
             boxes = result.boxes
             for box in boxes:
@@ -27,4 +28,4 @@ if __name__ == '__main__':
         sys.exit(1)
 
     video_path = sys.argv[1]
-    inference(video_path)
+    results = inference(video_path)
