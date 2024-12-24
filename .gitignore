@@ -7,6 +7,12 @@ terraform.tfstate.backup
 data/*
 src/data_collection/blink_auth.json
 
+# train data
+src/train/teddy/images/*
+src/train/teddy/labels/*
+runs/*
+*.pt
+
 venv/
 .env
 
