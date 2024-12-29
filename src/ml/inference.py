@@ -2,6 +2,7 @@
 
 import sys
 
+model_path = 'src/ml/models/teddy_state_predictor.h5'
 
 priority_state = [
     {
@@ -37,6 +38,7 @@ def generate_predictions(video_path):
 
 
 if __name__ == '__main__':
+    print("Inference ML: " + model_path)
     if len(sys.argv) < 2:
         print("Usage: python inference.py <video_path>")
         sys.exit(1)

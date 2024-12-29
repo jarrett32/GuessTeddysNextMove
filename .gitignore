@@ -8,12 +8,17 @@ data/*
 src/data_collection/blink_auth.json
 
 # train data
-src/train/teddy/images/*
-src/train/teddy/labels/*
-runs/*
+src/cv/models/*
+src/cv/train_set/*
+src/ml/models/*
+src/ml/train_set/*
 *.pt
 
-venv/
+# output
+output.txt
+output.csv
+
+.venv/
 .env
 .ruff_cache
 
