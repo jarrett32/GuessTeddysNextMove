@@ -1,34 +1,48 @@
 import os
 import random
 import shutil
+import sys
 
 
-def split_data(val_percentage=0.05):
-    train_image_path = 'src/train/teddy/images/train'
-    val_image_path = 'src/train/teddy/images/val'
-    train_label_path = 'src/train/teddy/labels/train'
-    val_label_path = 'src/train/teddy/labels/val'
+def split_data(base_path, val_percentage=0.05):
+    source_path = os.path.join(base_path, 'images')
+    train_path = os.path.join(source_path, 'train')
+    val_path = os.path.join(source_path, 'val')
 
-    os.makedirs(val_image_path, exist_ok=True)
-    os.makedirs(val_label_path, exist_ok=True)
+    for path in [train_path, val_path]:
+        if os.path.exists(path):
+            shutil.rmtree(path)
+    
+    os.makedirs(train_path)
+    os.makedirs(val_path)
 
-    image_files = [f for f in os.listdir(train_image_path) if f.endswith('.jpg')]
+    image_files = [f for f in os.listdir(source_path) if f.endswith('.jpg') and os.path.isfile(os.path.join(source_path, f))]
     num_val = int(len(image_files) * val_percentage)
     val_images = random.sample(image_files, num_val)
 
-    for img in val_images:
-        src_img = os.path.join(train_image_path, img)
-        dst_img = os.path.join(val_image_path, img)
+    # Move files to respective directories
+    for img in image_files:
+        src = os.path.join(source_path, img)
+        dst = os.path.join(val_path if img in val_images else train_path, img)
+        shutil.move(src, dst)  # Using move since we're reorganizing within images/
 
-        label = img.replace('.jpg', '.txt')
-        src_label = os.path.join(train_label_path, label)
-        dst_label = os.path.join(val_label_path, label)
-
-        shutil.move(src_img, dst_img)
-        if os.path.exists(src_label):
-            shutil.move(src_label, dst_label)
-
-    print(f"Moved {len(val_images)} images and their labels to validation set")
+    print(f"Split complete:")
+    print(f"Training set: {len(image_files) - num_val} images")
+    print(f"Validation set: {num_val} images")
 
 if __name__ == '__main__':
-    split_data()
+
+    if len(sys.argv) < 2:
+        print("Usage: python split_train_val_set.py <dataset_name>")
+        sys.exit(1)
+
+    base_path = sys.argv[1]
+    if not os.path.exists(base_path):
+        print(f"Error: {base_path} does not exist")
+        sys.exit(1)
+
+    if not os.path.exists(os.path.join(base_path, 'images')):
+        print(f"Error: {base_path} does not contain an images folder")
+        sys.exit(1)
+
+    split_data(base_path)

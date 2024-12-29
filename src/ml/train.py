@@ -13,9 +13,6 @@ cols = [
     "water_y", "water_w", "water_h",
 ]
 
-def normalize_dx_dy(number, fps):
-    return number / fps
-
 def prepare_sequences(df, sequence_length=10):
     features = []
     labels = []
