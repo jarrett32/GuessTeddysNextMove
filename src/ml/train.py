@@ -3,9 +3,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-import tensorflow as tf # type: ignore
-from keras.models import Sequential
-from keras.layers import LSTM, Dense, Dropout
+import tensorflow as tf 
 
 cols = [
     "frame_idx", "teddy_state", "teddy_confidence", "teddy_x", "teddy_y",
@@ -19,7 +17,6 @@ def normalize_dx_dy(number, fps):
     return number / fps
 
 def prepare_sequences(df, sequence_length=10):
-    """Prepare sequences of observations for LSTM"""
     features = []
     labels = []
     
@@ -41,13 +38,13 @@ def prepare_sequences(df, sequence_length=10):
     return np.array(features), np.array(labels)
 
 def create_model(sequence_length, n_features):
-    model = Sequential([
-        LSTM(64, input_shape=(sequence_length, n_features), return_sequences=True),
-        Dropout(0.2),
-        LSTM(32),
-        Dropout(0.2),
-        Dense(32, activation='relu'),
-        Dense(5, activation='softmax')  # Changed to 5 to match number of states
+    model = tf.keras.Sequential([
+        tf.keras.layers.LSTM(64, input_shape=(sequence_length, n_features), return_sequences=True),
+        tf.keras.layers.Dropout(0.2),
+        tf.keras.layers.LSTM(32),
+        tf.keras.layers.Dropout(0.2),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(5, activation='softmax')  # Changed to 5 to match number of states
     ])
     return model
 
@@ -117,7 +114,7 @@ if __name__ == '__main__':
     print("Training ML Model")
 
     if len(sys.argv) < 2:
-        print("Usage: python main_ml.py <filepath>")
+        print("Usage: python train.py <filepath>")
         sys.exit(1)
 
     training_data_path = sys.argv[1]

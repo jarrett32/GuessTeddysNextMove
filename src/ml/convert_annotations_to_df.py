@@ -184,6 +184,10 @@ if __name__ == '__main__':
         print("Usage: python main_ml.py <filepath>")
         sys.exit(1)
 
+    if not sys.argv[1].endswith('.txt'):
+        print("Error: The provided file is not a TXT file.")
+        sys.exit(1)
+
     filepath = sys.argv[1]
     if filepath.endswith(".json"):
         df = instances_default_to_df(filepath)

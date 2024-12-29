@@ -7,6 +7,7 @@ This is a project to train a CV model on my brothers dog Teddy. Teddy is a wild 
 - [Guess Teddys Next Move](#guess-teddys-next-move)
   - [Table of Contents](#table-of-contents)
   - [Setup](#setup)
+  - [Folder Structure](#folder-structure)
   - [Data Collection](#data-collection)
   - [Prediction Machine Learning Model](#prediction-machine-learning-model)
 
@@ -21,6 +22,34 @@ pip install -r requirements.txt
 terraform init
 terraform plan
 terraform apply
+```
+
+## Folder Structure
+
+```
+.
+├── data/
+├── src/
+    ├── cv/
+    │   ├── models/                 # folder for storing models
+    │   ├── train_set/              # folder for storing training data
+    │   ├── inference.py            # cv model inference script
+    │   ├── train.py                # cv model training script
+    │   └── split_train_val_set.py
+    │
+    ├── ml/
+    │   ├── models/             # folder for storing models
+    │   ├── train_set/          # folder for storing training data
+    │   ├── inference.py        # ml model inference script
+    │   ├── train.py            # ml model training script
+    │   └── convert.py          # script for converting cv output to ml format
+    │
+    ├── app/
+    │   └── main.py             # main app script to run both models and optimizations on
+    │
+    └── data_collection/
+        ├── main.py             # data collection script
+        └── uploadToS3.py       # script to upload data to s3
 ```
 
 ## Data Collection
@@ -42,4 +71,3 @@ python src/data_collection/uploadToS3.py
 
 
 ## Prediction Machine Learning Model
-`pip uninstall -y jax jaxlib` if m1 mac is giving you problems
