@@ -8,6 +8,7 @@ This is a project to train a CV model on my brothers dog Teddy. Teddy is a wild 
   - [Table of Contents](#table-of-contents)
   - [Setup](#setup)
   - [Data Collection](#data-collection)
+  - [Prediction Machine Learning Model](#prediction-machine-learning-model)
 
 ## Setup
 
@@ -39,3 +40,6 @@ python src/data_collection/uploadToS3.py
 
 *You can easily seperate the buckets by changing the `data_collection_bucket_name` in you tfvars file rerunning the process.*
 
+
+## Prediction Machine Learning Model
+`pip uninstall -y jax jaxlib` if m1 mac is giving you problems
