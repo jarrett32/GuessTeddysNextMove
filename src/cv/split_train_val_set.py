@@ -34,10 +34,9 @@ def split_data(base_path, val_percentage=0.2):
             shutil.move(src_label, dst_label)
         else:
             print(f"Creating empty label file for {img_file}")
-            with open(dst_label, 'w') as f:
-                pass  
+            open(dst_label, 'w').close()
 
-    print(f"Split complete:")
+    print("Split complete:")
     print(f"Training set: {len(image_files) - num_val} images")
     print(f"Validation set: {num_val} images")
 

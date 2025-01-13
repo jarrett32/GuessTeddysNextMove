@@ -188,6 +188,7 @@ def main():
     prev_frame      = None
     consecutive_teddy_frames = 0
     prev_predicted_state = None
+    state_probs = {}
 
     print(f"[INFO] Starting inference on: {video_path}")
     results_iterator = yolo_model.predict(

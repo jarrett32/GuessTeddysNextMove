@@ -6,10 +6,18 @@ This is a project to train a CV model on my brothers dog Teddy. Teddy is a wild 
 ## Table of Contents
 - [Guess Teddys Next Move](#guess-teddys-next-move)
   - [Table of Contents](#table-of-contents)
+  - [Usage](#usage)
   - [Setup](#setup)
   - [Folder Structure](#folder-structure)
   - [Data Collection](#data-collection)
   - [Prediction Machine Learning Model](#prediction-machine-learning-model)
+
+## Usage
+This repository really only provides two interesting components:
+- [Data Collection](src/data_collection/) A data collection script that will take pictures from your blink cameras
+- [YOLO + LSTM](src/app/) An example end to end application that will take a video and run the YOLO + LSTM model on it
+
+Note: *The other scripts in this repository are intermediate steps used during development and model training. There are plenty better examples out there to probably train and inference models, but were necessary stepping stones to get to the end result.*
 
 ## Setup
 

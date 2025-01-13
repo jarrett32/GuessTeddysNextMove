@@ -4,7 +4,6 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import tensorflow as tf 
-import matplotlib.pyplot as plt
 
 cols = [
     "frame_idx", "teddy_state", "teddy_confidence", "teddy_x", "teddy_y",
@@ -79,7 +78,7 @@ def train_model(data_source):
         metrics=['accuracy']
     )
     
-    history = model.fit(
+    _history = model.fit(
         X_train, y_train,
         epochs=100,
         batch_size=16,
