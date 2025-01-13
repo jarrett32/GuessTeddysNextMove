@@ -1,3 +1,4 @@
+import time
 import pandas as pd
 import tensorflow as tf
 import joblib
@@ -51,13 +52,16 @@ def generate_predictions(annotation_df_path, model_path, scaler_path):
     
     sequence_length = 10
     predictions = []
+    inference_times = []
     
     for i in range(len(df) - sequence_length + 1):
         sequence = df[feature_cols].iloc[i:i + sequence_length].values
         sequence = sequence.reshape(1, sequence_length, len(feature_cols))
-        
+
+        start_time = time.perf_counter()
         pred_probs = model.predict(sequence, verbose=0)[0]
-        
+        inference_time = (time.perf_counter() - start_time) * 1000
+        inference_times.append(inference_time)
         state_probs = {
             state['STATE']: float(pred_probs[idx]) 
             for idx, state in enumerate(priority_state)
@@ -74,6 +78,9 @@ def generate_predictions(annotation_df_path, model_path, scaler_path):
     
     output_path = annotation_df_path.replace('.csv', '_predictions.csv')
     predictions_df.to_csv(output_path, index=False)
+
+    inference_times_df = pd.DataFrame({'frame_idx': predictions_df['frame_idx'], 'inference_time': inference_times})
+    inference_times_df.to_csv(annotation_df_path.replace('.csv', '_inference_times.csv'), index=False)
     
     return predictions_df
 

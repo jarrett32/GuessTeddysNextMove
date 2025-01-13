@@ -184,8 +184,8 @@ if __name__ == '__main__':
         print("Usage: python main_ml.py <filepath>")
         sys.exit(1)
 
-    if not sys.argv[1].endswith('.txt'):
-        print("Error: The provided file is not a TXT file.")
+    if not sys.argv[1].endswith('.txt') and not sys.argv[1].endswith('.json'):
+        print("Error: The provided file is not a TXT or JSON file.")
         sys.exit(1)
 
     filepath = sys.argv[1]

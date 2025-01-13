@@ -12,7 +12,7 @@ def train_model(data_path):
         batch=16,
         device='cpu',
         project='src/cv/models',
-        name='teddy_model'
+        name='teddy_model2',
     )
 
 if __name__ == '__main__':
