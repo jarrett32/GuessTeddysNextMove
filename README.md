@@ -10,7 +10,6 @@ This is a project to train a CV model on my brothers dog Teddy. Teddy is a wild 
   - [Setup](#setup)
   - [Folder Structure](#folder-structure)
   - [Data Collection](#data-collection)
-  - [Prediction Machine Learning Model](#prediction-machine-learning-model)
 
 ## Usage
 This repository really only provides two interesting components:
@@ -76,6 +75,3 @@ python src/data_collection/uploadToS3.py
 
 
 *You can easily seperate the buckets by changing the `data_collection_bucket_name` in you tfvars file rerunning the process.*
-
-
-## Prediction Machine Learning Model

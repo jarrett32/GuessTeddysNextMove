@@ -34,8 +34,8 @@ COLS = [
 ]
 
 priority_state = [
-    {"STATE": "TEDDY",         "LABEL": "teddy",         "PRIORITY": 1},
-    {"STATE": "TEDDY_LYING",   "LABEL": "teddy_lying",   "PRIORITY": 2},
+    {"STATE": "TEDDY",         "LABEL": "teddy",         "PRIORITY": 2},
+    {"STATE": "TEDDY_LYING",   "LABEL": "teddy_lying",   "PRIORITY": 1},
     {"STATE": "TEDDY_PLAYING", "LABEL": "teddy_play",    "PRIORITY": 3},
     {"STATE": "TEDDY_HOWLING", "LABEL": "teddy_howling", "PRIORITY": 4},
 ]
