@@ -10,6 +10,8 @@ This is a project to train a CV model on my brothers dog Teddy. Teddy is a wild 
   - [Setup](#setup)
   - [Folder Structure](#folder-structure)
   - [Data Collection](#data-collection)
+  - [Diagram](#diagram)
+  - [Insights](#insights)
 
 ## Usage
 This repository really only provides two interesting components:
@@ -75,3 +77,24 @@ python src/data_collection/uploadToS3.py
 
 
 *You can easily seperate the buckets by changing the `data_collection_bucket_name` in you tfvars file rerunning the process.*
+
+## Diagram
+
+![diagram](diagram.png)
+
+## Insights
+
+Here are some things to think about when creating a project similar to this:
+
+- **Background Class**: Initially, I considered adding a fifth state, such as teddy_drinking or teddy_eating. However, I realized there wasn't enough data for these classes. Instead, maintaining a still object still proved beneficial for the LSTM, as any movement would indicate camera shake (or movement), reducing the weight of the dx and dy parameters.
+- **Skipping Inference**: By identifying when Teddy was in a "steady state" like teddy_lying, I chose to skip inferencing, which optimized performance.
+- **Prioritizing States**: Assigning priorities to Teddy's states—teddy_howling > teddy_playing > teddy_lying > teddy (normal) assisted in addressing underfitting and resolving instances where Teddy was in multiple states simultaneously.
+
+Some things I would do differently:
+
+- **Audio**: Would help increase the accuracy of the model. It would also be fun to experiment with. For example I can use conditional computing to see if i get better performance.
+- **Tiny Model Suite**: I'm interested to see how much better performance I can get by using a tiny YOLO model and how accurate it is.
+- **Hardware Optimization**: Interested in seeing difference in inference speeds on a gpu versus a cpu. They handle different types of tasks differently.
+
+For the rest of the writeup check it out on my portfolio here:
+https://www.jathompson.dev/writing/power-of-multimodal-technique
